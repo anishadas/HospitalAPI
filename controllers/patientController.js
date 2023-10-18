@@ -1,5 +1,11 @@
 const Patient = require('../models/patient');
 
+
+module.exports.home = (req, res) => {
+    res.send("<h1>WELCOME TO HOSPITAL API</h1>")
+}
+
+
 module.exports.register = async (req, res) => {
     try {
         req.body.doctor = "652ecfd533fec6b6564d037a"

@@ -1,6 +1,7 @@
 const Doctor = require('../models/doctor');
 const jwt = require('jsonwebtoken');
 
+//register a doctor
 module.exports.register = async (req, res) => {
     try {
         if (req.body.password.length < 6)
@@ -23,6 +24,7 @@ module.exports.register = async (req, res) => {
     }
 }
 
+//login with jwt creation
 module.exports.login = async (req, res) => {
     try {
         console.log(req.body)

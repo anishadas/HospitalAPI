@@ -1,14 +1,17 @@
 const Patient = require('../models/patient');
 
-
+//home page
 module.exports.home = (req, res) => {
     res.send("<h1>WELCOME TO HOSPITAL API</h1>")
 }
 
-
+//patient register
 module.exports.register = async (req, res) => {
     try {
+        //dummy doctor
         req.body.doctor = "652ecfd533fec6b6564d037a"
+
+        // check if  patient already exists
         const user = await Patient.findOne({ phoneNumber: req.body.phoneNumber });
         if (user) {
             return res.status(200).json({
@@ -17,6 +20,8 @@ module.exports.register = async (req, res) => {
                 msg:"user already registered"
             })
         }
+
+        //create new patient
         const patient = await Patient.create(req.body)
 
         return res.status(200).json({
@@ -32,6 +37,7 @@ module.exports.register = async (req, res) => {
     }
 }
 
+//create report
 module.exports.createReport = async (req, res) => {
     try {
         const patient = await Patient.findById(req.params.id);
@@ -52,6 +58,7 @@ module.exports.createReport = async (req, res) => {
     }
 }
 
+//view all rpeorts of a patient
 module.exports.allReports = async (req, res) => {
     try {
         const patient = await Patient.findById(req.params.id);
@@ -74,6 +81,7 @@ module.exports.allReports = async (req, res) => {
     }
 }
 
+//view reports status wise
 module.exports.reports = async (req, res) => {
     try {
         const patient = await Patient.find({ reports: { $elemMatch: { status: req.params.status } } });

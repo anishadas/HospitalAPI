@@ -9,10 +9,11 @@ module.exports.home = (req, res) => {
 module.exports.register = async (req, res) => {
     try {
         //dummy doctor
-        req.body.doctor = "652ecfd533fec6b6564d037a"
+        req.body.doctor = "6530127990d25b27aee5ae47"
 
         // check if  patient already exists
         const user = await Patient.findOne({ phoneNumber: req.body.phoneNumber });
+        console.log("user",user)
         if (user) {
             return res.status(200).json({
                 success: true,
@@ -26,7 +27,8 @@ module.exports.register = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            msg: "patient registered successfully"
+            msg: "patient registered successfully",
+            patient
         })
 
     } catch (err) {

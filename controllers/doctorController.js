@@ -13,7 +13,8 @@ module.exports.register = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            msg: "doctor registered successfully"
+            msg: "doctor registered successfully",
+            doctor
         })
 
     } catch (err) {
